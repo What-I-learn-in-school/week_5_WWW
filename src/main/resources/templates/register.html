@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href=”https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css” rel=”stylesheet”>
+    <script>
+        // Function to toggle the visibility of candidate and company forms based on the selected radio button
+        function toggleForms() {
+            const isCandidate = document.getElementById('candidate_choice').checked;
+            const isCompany = document.getElementById('company_choice').checked;
+
+            document.getElementById('candidate_form').classList.toggle('hidden', !isCandidate);
+            document.getElementById('company_form').classList.toggle('hidden', !isCompany);
+        }
+    </script>
+</head>
+<body>
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+    <img src="/img/beams.jpg" alt="" class="absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2" width="1308" />
+    <div class="absolute inset-0 bg-[url(/img/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+    <div class="relative bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+        <div class="mx-auto max-w-md">
+            <div>
+                <p class="font-bold">Register</p>
+            </div>
+            <div>
+                <form method="post" action="register" th:object="${register}">
+                    <div class="flex flex-col gap-4">
+                        <!-- Username and Password Fields -->
+                        <div class="flex flex-col">
+                            <label for="username">Username:</label>
+                            <input name="username" id="username" type="text" th:field="*{username}" class="rounded-md border px-4" />
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="password">Password:</label>
+                            <input name="password" id="password" type="password" th:field="*{password}" class="rounded-md border px-4" />
+                        </div>
+
+                        <!-- Register For Radio Buttons -->
+                        <div class="flex flex-row gap-4">
+                            <label for="company_choice">Register for: </label>
+                            <input th:field="*{registerFor}" name="register_for" id="company_choice" type="radio" value="Company" class="rounded-md border px-4" onchange="toggleForms()" />
+                            <label for="company_choice">Company</label>
+                            <input th:field="*{registerFor}" name="register_for" id="candidate_choice" type="radio" value="Candidate" class="rounded-md border px-4" onchange="toggleForms()" />
+                            <label for="candidate_choice">Candidate</label>
+                        </div>
+
+                        <!-- Address Form (Always visible) -->
+                        <div class="flex flex-col gap-4 mt-6">
+                            <p class="font-bold">Address</p>
+                            <div class="flex flex-col">
+                                <label for="country">Country:</label>
+                                <input th:field="*{address.country}" id="country" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="zipcode">Zip Code:</label>
+                                <input th:field="*{address.zipcode}" id="zipcode" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="number">Number:</label>
+                                <input th:field="*{address.number}" id="number" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="city">City:</label>
+                                <input th:field="*{address.city}" id="city" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="street">Street:</label>
+                                <input th:field="*{address.street}" id="street" type="text" class="rounded-md border px-4" />
+                            </div>
+                        </div>
+
+                        <!-- Candidate Form (Visible when 'Candidate' is selected) -->
+                        <div id="candidate_form" class="hidden flex flex-col gap-4 mt-6">
+                            <p class="font-bold">Candidate Information</p>
+                            <div class="flex flex-col">
+                                <label for="full_name">Full Name:</label>
+                                <input th:field="*{candidate.fullName}" id="full_name" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="email">Email:</label>
+                                <input th:field="*{candidate.email}" id="email" type="email" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="phone">Phone:</label>
+                                <input th:field="*{candidate.phone}" id="phone" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="dob">Date of Birth:</label>
+                                <input th:field="*{candidate.dob}" id="dob" type="date" class="rounded-md border px-4" />
+                            </div>
+                        </div>
+
+                        <!-- Company Form (Visible when 'Company' is selected) -->
+                        <div id="company_form" class="hidden flex flex-col gap-4 mt-6">
+                            <p class="font-bold">Company Information</p>
+                            <div class="flex flex-col">
+                                <label for="company_name">Company Name:</label>
+                                <input th:field="*{company.companyName}" id="company_name" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="company_email">Email:</label>
+                                <input th:field="*{company.email}" id="company_email" type="email" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="company_phone">Phone:</label>
+                                <input th:field="*{company.phone}" id="company_phone" type="text" class="rounded-md border px-4" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="web_url">Website URL:</label>
+                                <input th:field="*{company.webUrl}" id="web_url" type="url" class="rounded-md border px-4" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2">Register</button>
+                </form>
+
+                <a href="login">Login</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
