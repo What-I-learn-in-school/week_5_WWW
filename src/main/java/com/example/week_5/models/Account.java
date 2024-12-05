@@ -30,9 +30,11 @@ public class Account {
     @Column(name = "role", nullable = false)
     private Role role;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account")
     private Set<Candidate> candidates;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account")
     private Set<Company> companies;
 

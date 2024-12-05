@@ -3,6 +3,7 @@ package com.example.week_5.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -10,6 +11,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
+
 @Table(name = "company")
 public class Company {
     @Id
@@ -32,10 +35,12 @@ public class Company {
     @Column(name = "web_url")
     private String webUrl;
 
+    @ToString.Exclude
     @OneToOne(optional = false)
     @JoinColumn(name = "address", nullable = false)
     private Address address;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "company")
     private Set<Job> jobs = new LinkedHashSet<>();
 

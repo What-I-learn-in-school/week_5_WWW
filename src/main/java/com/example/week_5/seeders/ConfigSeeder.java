@@ -14,10 +14,11 @@ public class ConfigSeeder {
     @Bean
     public CommandLineRunner run(CompanySeeder companySeeder, SkillSeeder skillSeeder, JobSeeder jobSeeder, CandidateSeeder candidateSeeder) {
         return args -> {
-            companySeeder.seed(100); // Tạo 100 người dùng giả lập
-            skillSeeder.seed(100); // Tạo 100 kỹ năng giả
+            companySeeder.seed(50); // Tạo 100 người dùng giả lập
+            skillSeeder.seed(10); // Tạo 100 kỹ năng giả
             jobSeeder.seed();
             candidateSeeder.seed(100);
+            System.out.println("Seed data success");
         };
     }
 }

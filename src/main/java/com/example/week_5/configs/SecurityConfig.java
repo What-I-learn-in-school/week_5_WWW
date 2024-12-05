@@ -33,9 +33,8 @@ public class SecurityConfig  {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("SELECT username, password FROM Account WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, role FROM Account WHERE username = ?").
-                passwordEncoder(passwordEncoder());
+                .usersByUsernameQuery("SELECT username, password FROM account WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, role FROM account WHERE username = ?");
     }
 
     @Bean
@@ -46,7 +45,6 @@ public class SecurityConfig  {
                         // Phân quyền endpoint theo vai trò
                         .requestMatchers("/company/**").hasRole("COMPANY")
                         .requestMatchers("/candidate/**").hasRole("CANDIDATE")
-                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin( form -> form.loginPage("/login").defaultSuccessUrl("/login")
                         .permitAll()).

@@ -3,9 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href=”https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css” rel=”stylesheet”>
 </head>
+<style>
+    /* Danh sách chính */
+    .rounded-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Các mục công việc */
+    .job-list {
+        list-style-type: none;
+        margin: 20px 0;
+        padding: 0;
+    }
+
+    .job-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f0f8ff; /* Màu nền nhẹ */
+        border-left: 4px solid #007bff; /* Thanh bên trái */
+        border-radius: 8px;
+    }
+
+    /* Danh sách kỹ năng */
+    .skill-list {
+        list-style-type: none;
+        margin: 10px 0;
+        padding: 0 20px;
+    }
+
+    .skill-item {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9; /* Màu nền nhẹ hơn */
+        border: 1px solid #ddd; /* Viền xung quanh */
+        border-radius: 8px;
+    }
+
+    /* Phông chữ đậm và màu sắc */
+    p {
+        font-weight: 600; /* Đậm hơn */
+    }
+
+    p > code {
+        font-weight: bold; /* Đậm chữ trong code */
+        font-size: 1rem;
+    }
+</style>
 <body>
 
 <h1>Candidate</h1>
+<h2>Dashboard</h2>
+
+<h2>Danh sách ứng tuyển phù hợp với vị trí của bạn</h2>
+<ol class="rounded-list" th:each="company : ${companies}">
+    <!-- Hiển thị thông tin công ty -->
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            CompanyName:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.companyName}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Email:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.email}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Phone:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.phone}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Website:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.webUrl}"></code>
+        </p>
+    </li>
+
+    <!-- Hiển thị danh sách công việc -->
+    <ol class="job-list" th:each="job : ${company.jobs}">
+        <li class="job-item">
+            <p class="ml-4 text-base font-semibold text-blue-700">
+                Job Name:
+                <code class="text-sm font-bold text-gray-900" th:text="${job.jobName}"></code>
+            </p>
+            <p class="ml-4 text-base text-gray-600">
+                Job Description:
+                <code class="text-sm font-normal text-gray-800" th:text="${job.jobDescription}"></code>
+            </p>
+
+            <!-- Hiển thị danh sách kỹ năng của công việc -->
+            <ol class="skill-list" th:each="jobSkill : ${job.jobSkills}">
+                <li class="skill-item">
+                    <p class="ml-6 text-sm font-bold text-purple-600">
+                        Skill:
+                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.skill.skillName}"></code>
+                    </p>
+                    <p class="ml-6 text-sm font-bold text-purple-600">
+                        More Info:
+                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.moreInfos}"></code>
+                    </p>
+                    <p class="ml-6 text-sm text-gray-600">
+                        Skill Level:
+                        <code class="text-sm font-normal text-gray-800" th:text="${jobSkill.skillLevel}"></code>
+                    </p>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</ol>
+
+
+<h2>Danh sách ứng tuyển bạn có the cải thiện bản thân</h2>
+<ol class="rounded-list" th:each="company : ${companyCanLear}">
+    <!-- Hiển thị thông tin công ty -->
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            CompanyName:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.companyName}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Email:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.email}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Phone:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.phone}"></code>
+        </p>
+    </li>
+    <li>
+        <p class="ml-4 font-bold text-lg">
+            Website:
+            <code class="text-sm font-bold text-gray-900" th:text="${company.webUrl}"></code>
+        </p>
+    </li>
+
+    <!-- Hiển thị danh sách công việc -->
+    <ol class="job-list" th:each="job : ${company.jobs}">
+        <li class="job-item">
+            <p class="ml-4 text-base font-semibold text-blue-700">
+                Job Name:
+                <code class="text-sm font-bold text-gray-900" th:text="${job.jobName}"></code>
+            </p>
+            <p class="ml-4 text-base text-gray-600">
+                Job Description:
+                <code class="text-sm font-normal text-gray-800" th:text="${job.jobDescription}"></code>
+            </p>
+
+            <!-- Hiển thị danh sách kỹ năng của công việc -->
+            <ol class="skill-list" th:each="jobSkill : ${job.jobSkills}">
+                <li class="skill-item">
+                    <p class="ml-6 text-sm font-bold text-purple-600">
+                        Skill:
+                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.skill.skillName}"></code>
+                    </p>
+                    <p class="ml-6 text-sm font-bold text-purple-600">
+                        More Info:
+                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.moreInfos}"></code>
+                    </p>
+                    <p class="ml-6 text-sm text-gray-600">
+                        Skill Level:
+                        <code class="text-sm font-normal text-gray-800" th:text="${jobSkill.skillLevel}"></code>
+                    </p>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</ol>
 </body>
 </html>

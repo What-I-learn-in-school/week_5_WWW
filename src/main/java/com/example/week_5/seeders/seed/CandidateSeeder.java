@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -28,6 +29,11 @@ public class CandidateSeeder {
 
     public void seed(int number) {
         Faker faker = new Faker();
+
+        List<Candidate> candidates = candidateRepository.findAll();
+        if (!candidates.isEmpty() ){
+            return;
+        }
 
         for (int i = 0; i < number; i++) {
             LocalDate date = generate.getRandomLocalDate(2010, 2024);

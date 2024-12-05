@@ -35,6 +35,7 @@ public class Candidate {
     @Column(name = "phone", nullable = false, length = 15)
     private String phone;
 
+    @ToString.Exclude
     @OneToOne(optional = false)
     private Address address;
 

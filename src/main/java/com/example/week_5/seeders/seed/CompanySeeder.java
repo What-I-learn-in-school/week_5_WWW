@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CompanySeeder {
     @Autowired private CompanyRepository companyRepository;
@@ -22,6 +24,11 @@ public class CompanySeeder {
 
     public void seed(int number) {
         Faker faker = new Faker();
+
+        List<Company> companies = companyRepository.findAll();
+        if (!companies.isEmpty() ){
+            return;
+        }
 
         for (int i = 0; i < number; i++) {
             Account  account  = new Account();

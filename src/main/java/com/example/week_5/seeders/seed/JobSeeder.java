@@ -32,8 +32,13 @@ public class JobSeeder {
         Faker faker = new Faker();
         List<Company> companies = companyRepository.findAll();
 
+        List<Job> jobs= jobRepository.findAll();
+        if (!jobs.isEmpty()){
+            return;
+        }
+
         for (Company company : companies){
-            int random = faker.random().nextInt(5, 10);
+            int random = faker.random().nextInt(1, 20);
 
             for (int i = 0; i < random; i++) {
                 Job job = new Job();
@@ -43,7 +48,7 @@ public class JobSeeder {
 
                 Job jobSave = jobRepository.save(job);
 
-                for (int j = 0; j < faker.random().nextInt(1, 5); j++) {
+                for (int j = 0; j < faker.random().nextInt(1, 20); j++) {
                     Skill skill = generate.getRandomSkill();
 
                     JobSkill jobSkill = new JobSkill();

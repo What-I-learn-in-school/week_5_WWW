@@ -32,9 +32,11 @@ public class Address {
     @Column(name = "zipcode", length = 7)
     private String zipcode;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "address")
     private Candidate candidate;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "address")
     private Company company;
 

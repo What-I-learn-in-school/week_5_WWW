@@ -18,6 +18,9 @@ public class JobSkill {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "more_infos", length = 1000)
+    private String moreInfos;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
@@ -25,9 +28,6 @@ public class JobSkill {
     @ManyToOne(optional = false)
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
-
-    @Column(name = "more_infos", length = 1000)
-    private String moreInfos;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "skill_level", nullable = false)

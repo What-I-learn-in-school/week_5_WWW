@@ -21,6 +21,11 @@ public class SkillSeeder {
     public void seed(int number) {
         Faker faker = new Faker();
 
+        List<Skill> skills = skillRepository.findAll();
+        if (!skills.isEmpty()){
+            return;
+        }
+
         for (int i = 0; i < number; i++) {
             Skill skill = new Skill();
             skill.setSkillName(faker.job().keySkills());
