@@ -22,6 +22,7 @@
     8. Giúp các công ty tìm các ứng viên phù hợp.
     9. Tạo trang đăng tuyển công việc.
     10. Đề xuất một số skill mà nhân viên có thể học.
+    11. Gửi Email
 ## Công nghệ được sử dụng
 
 **Back-end: Java Spring Boot**.
@@ -59,3 +60,5 @@
 ![Danh sách các ứng viên phù hợp công việc mà công ty đang tuyển](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Company2.png)
     4.3 Tạo tin ứng tuyển.
 ![Tạo tin ứng tuyển](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/CompanyCreate.png)
+    4.4 Gửi email ứng tuyển.
+![Email]([https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/CompanyCreate.png](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/SendMail.png)) 
