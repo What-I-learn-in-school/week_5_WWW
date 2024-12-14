@@ -2,140 +2,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href=”https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css” rel=”stylesheet”>
+    <title>Create Job</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4A90E2;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        button {
+            background-color: #4A90E2;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-size: 16px;
-        text-align: left;
-    }
-
-    /* Adding borders and rounded corners */
-    table th, table td {
-        border: 1px solid #dddddd;
-        padding: 12px;
-    }
-
-    table th {
-        background-color: #f4f4f4;
-        color: #333;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    /* Alternating row colors */
-    table tbody tr:nth-child(odd) {
-        background-color: #f9f9f9;
-    }
-
-    table tbody tr:nth-child(even) {
-        background-color: #ffffff;
-    }
-
-    /* Hover effect */
-    table tbody tr:hover {
-        background-color: #f1f1f1;
-        cursor: pointer;
-    }
-
-    /* Responsive table */
-    @media (max-width: 768px) {
-        table {
-            font-size: 14px;
-        }
-        table th, table td {
-            padding: 8px;
-        }
-    }
-
-    /* Styling the table container */
-    .table-container {
-        overflow-x: auto;
-        margin: 20px;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-    }
-    /* Danh sách chính */
-    .rounded-list {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Các mục công việc */
-    .job-list {
-        list-style-type: none;
-        margin: 20px 0;
-        padding: 0;
-    }
-
-    .job-item {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f0f8ff; /* Màu nền nhẹ */
-        border-left: 4px solid #007bff; /* Thanh bên trái */
-        border-radius: 8px;
-    }
-
-    /* Danh sách kỹ năng */
-    .skill-list {
-        list-style-type: none;
-        margin: 10px 0;
-        padding: 0 20px;
-    }
-
-    .skill-item {
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #f9f9f9; /* Màu nền nhẹ hơn */
-        border: 1px solid #ddd; /* Viền xung quanh */
-        border-radius: 8px;
-    }
-
-    /* Phông chữ đậm và màu sắc */
-    p {
-        font-weight: 600; /* Đậm hơn */
-    }
-
-    p > code {
-        font-weight: bold; /* Đậm chữ trong code */
-        font-size: 1rem;
-    }
-</style>
 <body>
-    <h1>Create job</h1>
-    <form action="/company/create-job/create" method="post" th:object="${jobDto}">
+<h1>Create Job</h1>
+<form action="/company/create-job/create" method="post" th:object="${jobDto}">
+    <div class="form-group">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required th:field="*{jobName}">
-        <br>
+    </div>
+
+    <div class="form-group">
         <label for="description">Description</label>
         <textarea id="description" name="description" required th:field="*{jobDescription}"></textarea>
-        <br>
+    </div>
 
-        <label for="skill">skill</label>
-    <select name="skill" id="skill" th:field="*{skillId}">
-        <option th:each="skill : ${skills}" th:text="${skill.skillName}" th:value="${skill.id}"></option>
+    <div class="form-group">
+        <label for="skill">Skill</label>
+        <select name="skill" id="skill" th:field="*{skillId}">
+            <option th:each="skill : ${skills}" th:text="${skill.skillName}" th:value="${skill.id}"></option>
+        </select>
+    </div>
 
-    </select>
-
+    <div class="form-group">
         <label for="level">Level</label>
         <select name="level" id="level" th:field="*{skillLevel}">
-<!--    MASTER,BEGINNER,ADVANCED,PROFESSIONAL,INTERMEDIATE-->
             <option value="MASTER">MASTER</option>
             <option value="BEGINNER">BEGINNER</option>
             <option value="ADVANCED">ADVANCED</option>
             <option value="PROFESSIONAL">PROFESSIONAL</option>
             <option value="INTERMEDIATE">INTERMEDIATE</option>
         </select>
-        <label for="moreInfo">More Infor: </label>
-        <input type="text" id="moreInfo" name="moreInfo" required th:field="*{moreInfos}">
+    </div>
 
-        <br>
-        <button type="submit">Create</button>
-    </form>
+    <div class="form-group">
+        <label for="moreInfo">More Info</label>
+        <input type="text" id="moreInfo" name="moreInfo" required th:field="*{moreInfos}">
+    </div>
+
+    <button type="submit">Create</button>
+</form>
 </body>
 </html>

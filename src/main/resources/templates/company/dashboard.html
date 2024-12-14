@@ -3,180 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href=”https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css” rel=”stylesheet”>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-size: 16px;
-        text-align: left;
-    }
+<body style="font-family: 'Arial', sans-serif; background-color: #f9fafb; padding: 20px;">
 
-    /* Adding borders and rounded corners */
-    table th, table td {
-        border: 1px solid #dddddd;
-        padding: 12px;
-    }
+<h1 style="font-size: 2rem; color: #4A90E2; text-align: center; margin-bottom: 30px;">Company</h1>
 
-    table th {
-        background-color: #f4f4f4;
-        color: #333;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+<a href="/company/create-job" style="display: block; text-align: center; margin-bottom: 40px; font-size: 1.2rem; color: #007bff; text-decoration: none; font-weight: bold;">Create Job</a>
 
-    /* Alternating row colors */
-    table tbody tr:nth-child(odd) {
-        background-color: #f9f9f9;
-    }
+<h2 style="font-size: 1.5rem; color: #333; text-align: center; margin-bottom: 20px;">Danh sách công việc đang ứng tuyển của công ty</h2>
 
-    table tbody tr:nth-child(even) {
-        background-color: #ffffff;
-    }
+<ol class="job-list" th:each="job : ${jobs}" style="display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto;">
+    <li class="job-item" style="padding: 20px; background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 10px; transition: all 0.3s ease;">
+        <p class="ml-4 text-lg font-semibold text-blue-700" style="margin-bottom: 8px;">
+            Job Name:
+            <code class="text-sm font-bold text-gray-900" th:text="${job.jobName}"></code>
+        </p>
+        <p class="ml-4 text-base text-gray-600" style="margin-bottom: 12px;">
+            Job Description:
+            <code class="text-sm font-normal text-gray-800" th:text="${job.jobDescription}"></code>
+        </p>
 
-    /* Hover effect */
-    table tbody tr:hover {
-        background-color: #f1f1f1;
-        cursor: pointer;
-    }
+        <!-- Hiển thị danh sách kỹ năng của công việc -->
+        <ol th:each="jobSkill : ${job.jobSkills}" class="flex flex-col gap-3 pl-5">
+            <li class="skill-item bg-gray-100 p-3 border border-gray-300 rounded-lg shadow-sm">
+                <p class="ml-4 text-sm font-bold text-purple-600 mb-2">
+                    Skill: <code class="font-bold text-gray-900" th:text="${jobSkill.skill.skillName}"></code>
+                </p>
+                <p class="ml-4 text-sm font-bold text-purple-600 mb-2">
+                    More Info: <code class="font-bold text-gray-900" th:text="${jobSkill.moreInfos}"></code>
+                </p>
+                <p class="ml-4 text-sm text-gray-600">
+                    Skill Level: <code class="font-normal text-gray-800" th:text="${jobSkill.skillLevel}"></code>
+                </p>
+            </li>
+        </ol>
+    </li>
+</ol>
 
-    /* Responsive table */
-    @media (max-width: 768px) {
-        table {
-            font-size: 14px;
-        }
-        table th, table td {
-            padding: 8px;
-        }
-    }
+<h2 style="font-size: 1.5rem; color: #333; text-align: center; margin-top: 40px; margin-bottom: 20px;">Danh sách công việc ứng tuyển</h2>
 
-    /* Styling the table container */
-    .table-container {
-        overflow-x: auto;
-        margin: 20px;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-    }
-    /* Danh sách chính */
-    .rounded-list {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 16px; text-align: left; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+    <thead>
+    <tr>
+        <th style="border: 1px solid #dddddd; padding: 12px; background-color: #f4f4f4; color: #333; font-weight: bold; text-transform: uppercase;">Candidate</th>
+        <th style="border: 1px solid #dddddd; padding: 12px; background-color: #f4f4f4; color: #333; font-weight: bold; text-transform: uppercase;">Jobs</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="result : ${companyCanLear}">
+        <!-- Candidate -->
+        <td style="border: 1px solid #dddddd; padding: 12px; vertical-align: top;">
+            <p><strong>Email:</strong> <span th:text="${result['candidate'].email}"></span></p>
+            <p><strong>Full Name:</strong> <span th:text="${result['candidate'].fullName}"></span></p>
+            <p><strong>Phone:</strong> <span th:text="${result['candidate'].phone}"></span></p>
+        </td>
 
-    /* Các mục công việc */
-    .job-list {
-        list-style-type: none;
-        margin: 20px 0;
-        padding: 0;
-    }
-
-    .job-item {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f0f8ff; /* Màu nền nhẹ */
-        border-left: 4px solid #007bff; /* Thanh bên trái */
-        border-radius: 8px;
-    }
-
-    /* Danh sách kỹ năng */
-    .skill-list {
-        list-style-type: none;
-        margin: 10px 0;
-        padding: 0 20px;
-    }
-
-    .skill-item {
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #f9f9f9; /* Màu nền nhẹ hơn */
-        border: 1px solid #ddd; /* Viền xung quanh */
-        border-radius: 8px;
-    }
-
-    /* Phông chữ đậm và màu sắc */
-    p {
-        font-weight: 600; /* Đậm hơn */
-    }
-
-    p > code {
-        font-weight: bold; /* Đậm chữ trong code */
-        font-size: 1rem;
-    }
-</style>
-<body>
-
-<h1>Company</h1>
-
-<a href="/company/create-job">CreateJob</a>
-
-<h2>Danh sách công việc đang ứng tuyển của công ty</h2>
-    <!-- Hiển thị danh sách công việc -->
-    <ol class="job-list" th:each="job : ${jobs}">
-        <li class="job-item">
-            <p class="ml-4 text-base font-semibold text-blue-700">
-                Job Name:
-                <code class="text-sm font-bold text-gray-900" th:text="${job.jobName}"></code>
-            </p>
-            <p class="ml-4 text-base text-gray-600">
-                Job Description:
-                <code class="text-sm font-normal text-gray-800" th:text="${job.jobDescription}"></code>
-            </p>
-
-            <!-- Hiển thị danh sách kỹ năng của công việc -->
-            <ol class="skill-list" th:each="jobSkill : ${job.jobSkills}">
-                <li class="skill-item">
-                    <p class="ml-6 text-sm font-bold text-purple-600">
-                        Skill:
-                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.skill.skillName}"></code>
-                    </p>
-                    <p class="ml-6 text-sm font-bold text-purple-600">
-                        More Info:
-                        <code class="text-sm font-bold text-gray-900" th:text="${jobSkill.moreInfos}"></code>
-                    </p>
-                    <p class="ml-6 text-sm text-gray-600">
-                        Skill Level:
-                        <code class="text-sm font-normal text-gray-800" th:text="${jobSkill.skillLevel}"></code>
-                    </p>
+        <!-- Jobs -->
+        <td style="border: 1px solid #dddddd; padding: 12px; vertical-align: top;">
+            <ul style="padding-left: 20px; margin: 0;">
+                <li th:each="job : ${result['jobs']}">
+                    <p><strong>Job Name:</strong> <span th:text="${job.jobName}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${job.jobDescription}"></span></p>
+                    <div> </div>
                 </li>
-            </ol>
-        </li>
-    </ol>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-
-<!----------------------------------------------------------------------------------------------------------------->
-<h2>Danh sách công việc đang ứng tuyển của công ty</h2>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Candidate</th>
-            <th>Jobs</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="result : ${companyCanLear}">
-            <!-- Candidate -->
-            <td>
-                <p><strong>Email:</strong> <span th:text="${result['candidate'].email}"></span></p>
-                <p><strong>Full Name:</strong> <span th:text="${result['candidate'].fullName}"></span></p>
-                <p><strong>Phone:</strong> <span th:text="${result['candidate'].phone}"></span></p>
-            </td>
-
-            <!-- Jobs -->
-            <td>
-                <ul>
-                    <li th:each="job : ${result['jobs']}">
-                        <p><strong>Job Name:</strong> <span th:text="${job.jobName}"></span></p>
-                        <p><strong>Description:</strong> <span th:text="${job.jobDescription}"></span></p>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 </body>
 </html>
