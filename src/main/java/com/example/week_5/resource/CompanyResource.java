@@ -9,10 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -51,6 +48,12 @@ public class CompanyResource {
     public String createJob(@ModelAttribute JobDto jobDto) {
         User account = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     companyService.createJob(account.getUsername() ,jobDto);
+        return "redirect:/company/dashboard";
+    }
+
+    @PostMapping("/send-email")
+    public String sendEmail(@RequestParam String email) {
+        companyService.sendEmail(email);
         return "redirect:/company/dashboard";
     }
 }

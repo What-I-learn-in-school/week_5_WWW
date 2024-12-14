@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -34,6 +36,9 @@ public class CompanyService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public Set<Job> getJobsForCompany(String username) {
     Company company = companyRepository.findByAccount_Username(username).orElseThrow();
@@ -131,6 +136,21 @@ LIMIT 10\s
         jobSkillRepository.save(jobSkill);
         return true;
 
+    }
+
+    public boolean sendEmail (String email){
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("Job Opportunity");
+            message.setText("Dear Candidate, we have a job opportunity for you. Please contact us for more details.");
+            // Gửi email
+            mailSender.send(message);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
 

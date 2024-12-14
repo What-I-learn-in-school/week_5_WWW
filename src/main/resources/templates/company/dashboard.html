@@ -48,6 +48,7 @@
     <tr>
         <th style="border: 1px solid #dddddd; padding: 12px; background-color: #f4f4f4; color: #333; font-weight: bold; text-transform: uppercase;">Candidate</th>
         <th style="border: 1px solid #dddddd; padding: 12px; background-color: #f4f4f4; color: #333; font-weight: bold; text-transform: uppercase;">Jobs</th>
+        <th style="border: 1px solid #dddddd; padding: 12px; background-color: #f4f4f4; color: #333; font-weight: bold; text-transform: uppercase;">Send Email</th>
     </tr>
     </thead>
     <tbody>
@@ -68,6 +69,14 @@
                     <div> </div>
                 </li>
             </ul>
+        </td>
+
+        <!-- Send Email -->
+        <td style="border: 1px solid #dddddd; padding: 12px; vertical-align: top;">
+            <form action="/company/send-email" method="post">
+                <input type="hidden" name="email" th:value="${result['candidate'].email}" />
+                <button type="submit">Send Email</button>
+            </form>
         </td>
     </tr>
     </tbody>

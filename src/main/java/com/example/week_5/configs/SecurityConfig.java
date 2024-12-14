@@ -46,7 +46,7 @@ public class SecurityConfig  {
                         .requestMatchers("/company/**").hasRole("COMPANY")
                         .requestMatchers("/candidate/**").hasRole("CANDIDATE")
                         .anyRequest().authenticated()
-                ).formLogin( form -> form.loginPage("/login").defaultSuccessUrl("/login")
+                ).formLogin( form -> form.loginPage("/login")
                         .permitAll()).
                 logout(LogoutConfigurer::permitAll).
                 httpBasic(Customizer.withDefaults());
