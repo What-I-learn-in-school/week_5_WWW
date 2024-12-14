@@ -48,17 +48,25 @@
     2. Đăng ký.
 ![Đăng ký - Candidate](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Register-Candidate.png)
 ![Đăng ký - Company](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Register-Company.png)
+
     3. Nhân viên.
     3.1 Danh sách ứng tuyển phù hợp với vị trí của bạn.
+    
 ![Danh sách ứng tuyển phù hợp với vị trí của bạn](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Candidate1.png)
+
     3.2 Danh sách ứng tuyển bạn có thể cải thiện bản thân. 
+    
 ![Danh sách ứng tuyển bạn có thể cải thiện bản thân](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Candidate2.png)
+
     4. Công ty.
     4.1 Danh sách ứng tuyển của công ty.
 ![Danh sách ứng tuyển của công ty](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Company.png)
+
     4.2 Danh sách các ứng viên phù hợp công việc mà công ty đang tuyển.
 ![Danh sách các ứng viên phù hợp công việc mà công ty đang tuyển](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/Company2.png)
+
     4.3 Tạo tin ứng tuyển.
 ![Tạo tin ứng tuyển](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/CompanyCreate.png)
+
     4.4 Gửi email ứng tuyển.
-![Email]([https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/CompanyCreate.png](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/SendMail.png)) 
+![Email](https://raw.githubusercontent.com/What-I-learn-in-school/week_5_WWW/refs/heads/main/SendMail.png)
