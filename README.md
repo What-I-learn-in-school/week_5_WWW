@@ -9,7 +9,7 @@
 **Mã sinh viên:** 21046541.
 
 **Trường:**  Đại học Công nghiệp TP Hồ Chí Minh - IUH.
-## Tô mả dự án
+## Mô tả dự án
 Ứng dụng này là một cổng thông tin việc làm nơi các công ty có thể đăng tuyển dụng và ứng viên có thể nộp đơn xin việc. Nó bao gồm các tính năng như đăng tuyển, quản lý hồ sơ ứng viên, xin việc và giới thiệu công việc dựa trên kỹ năng của ứng viên.
 ## Những công việc đã làm.
     1. Tạo các lớp tương ứng mà đề bài đề ra.
